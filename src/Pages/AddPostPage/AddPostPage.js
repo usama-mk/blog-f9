@@ -124,11 +124,11 @@ const updateDocInDatabase= async ()=>{
       await addDoc(collection(db, 'posts'),
         {
           posted_by: userId,
-          username: userName,
+          username: user.user.displayName?user.user.displayName:userName,
           description: description,
           image: downloadURL,
           date: Timestamp.now(),
-          postedByPic:  user.user.profilePic,
+          postedByPic:  user.user.profilePic?user.user.profilePic:"",
         })
       navigate("/home")
     } catch (err) {

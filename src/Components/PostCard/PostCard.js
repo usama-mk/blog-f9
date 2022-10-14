@@ -19,8 +19,9 @@ import { db } from "../../firebaseConfig";
 import { deleteObject, getStorage, ref } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
 import { BiComment, BiDownvote, BiEdit, BiTime, BiUpvote } from "react-icons/bi";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { editPostReducer } from "../../features/editPostSlice";
+import { selectUser } from "../../features/userSlice";
 
 function PostCard({
   userId,
@@ -33,6 +34,8 @@ function PostCard({
   allowDelete,
   postedByPic
 }) {
+    const { user, loading } = useSelector(selectUser); 
+
     const [comments, setComments]= useState([])
   // show delete button
   const dispatch = useDispatch();
@@ -80,7 +83,13 @@ function PostCard({
   };
 
   const navigateToPost=()=>{
-    navigate(`/post/${postId}`)
+    if(user){
+        navigate(`/post/${postId}`)
+        return
+    }
+    navigate(`/`)
+       
+
   }
   const getComments = async (  callBackFunction) => {
 
@@ -108,7 +117,7 @@ useEffect(()=>{
             <div className="flex items-center ">
                 {
                    postedByPic?
-                    <img src={postedByPic} className='w-12 object-contain' alt="" />
+                    <img src={postedByPic} className='w-12 object-contain rounded-xl ' alt="" />
                     :<h5 className=" text-[#652666] ">
                     <BsPersonCircle className="w-12" />
                   </h5>

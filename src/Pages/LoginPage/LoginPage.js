@@ -107,11 +107,11 @@ function LoginPage() {
   return (
     <div className='loginPage'>
 
-      {/* <div className="loginPage__logo">
-        <SiHiveBlockchain /><span>Hartlepool<small> - CLG</small></span>
+      <div onClick={()=> navigate('/home')} className="loginPage__logo">
+        <SiHiveBlockchain /><span>OUR<small> - Blog</small></span>
       </div>
 
-      <p className="loginPage__description">
+      {/* <p className="loginPage__description">
         Stay up to date with the latest stories and commentary about the Hartlepool College and its ecosystem.
       </p> */}
 

@@ -7,11 +7,12 @@ import {
   AiOutlineAppstoreAdd,
   AiOutlineProfile,
   AiOutlineUser,
+  AiOutlineLogin,
 } from "react-icons/ai";
 import { BiCaretDown } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
 import { FiLogOut } from "react-icons/fi";
-import { SiHiveBlockchain } from "react-icons/si";
+import { SiGnuprivacyguard, SiHiveBlockchain } from "react-icons/si";
 import { useNavigate } from "react-router-dom";
 // imports for authentication
 import { useDispatch, useSelector } from "react-redux";
@@ -68,19 +69,37 @@ function Navbar({ activePage }) {
 
                 
 
-                <li
+                { user && <li
                     className={`navbar__navitem ${activePage === "addPost" ? "navbar__navitem--active" : ""}`}
                     onClick={() => { navigate("/add-post") }}
                 >
                     <AiOutlineAppstoreAdd />
-                </li>
+                </li>}
 
-                <li
+                { user &&  <li
                     className={`navbar__navitem ${activePage === "liked" ? "navbar__navitem--active" : ""}`}
                     onClick={() => { navigate("/profile") }}
                 >
                     <AiOutlineUser />
+                </li>}
+                {
+                   !user && 
+                   <li
+                    className={`navbar__navitem ${activePage === "liked" ? "navbar__navitem--active" : ""}`}
+                    onClick={() => { navigate("/") }}
+                >
+                    <AiOutlineLogin />
                 </li>
+                }
+                {
+                   !user && 
+                   <li
+                    className={`navbar__navitem ${activePage === "liked" ? "navbar__navitem--active" : ""}`}
+                    onClick={() => { navigate("/register") }}
+                >
+                    <SiGnuprivacyguard />
+                </li>
+                }
             </ul>
       {/* SETTINGS */}
       <div className="navbar__setting">
@@ -108,17 +127,35 @@ function Navbar({ activePage }) {
                   News Feed
                 </li>
 
-                <li
-                  className={`navbar__navitem--setting ${
-                    activePage === "liked" ? "navbar__navitem--active" : ""
-                  }`}
-                  onClick={() => {
-                    navigate("/liked-posts");
-                  }}
-                >
-                  Groups
-                </li>
-                {(
+                {
+                   !user && 
+                   <li
+                   className="navbar__navitem--setting"
+                   onClick={() => {
+                     navigate("/");
+                   }}
+                 >
+                   <AiOutlineLogin />
+                   &nbsp; Sign in
+                 </li>
+                }
+
+{
+                   !user && 
+                   <li
+                   className="navbar__navitem--setting"
+                   onClick={() => {
+                     navigate("/register");
+                   }}
+                 >
+                   <SiGnuprivacyguard />
+                   &nbsp; Register
+                 </li>
+                }
+
+
+              
+                {(  user && 
                   <li
                     className={`navbar__navitem--setting ${
                       activePage === "addPost" ? "navbar__navitem--active" : ""
@@ -130,76 +167,9 @@ function Navbar({ activePage }) {
                     <span>Create Post</span>
                   </li>
                 )}
+  
 
-                {user.role === "teacher" && (
-                  <li
-                    className={`navbar__navitem--setting ${
-                      activePage === "addGroup" ? "navbar__navitem--active" : ""
-                    }`}
-                    onClick={() => {
-                      navigate("/add-group");
-                    }}
-                  >
-                    Create Group
-                  </li>
-                )}
-
-                <li
-                  className={`navbar__navitem--setting ${
-                    activePage === "help" ? "navbar__navitem--active" : ""
-                  }`}
-                  onClick={() => {
-                    navigate("/help");
-                  }}
-                >
-                  Ask Help
-                </li>
-
-                <li
-                  className={`navbar__navitem--setting ${
-                    activePage === "help" ? "navbar__navitem--active" : ""
-                  }`}
-                  onClick={() => {
-                    navigate("/map");
-                  }}
-                >
-                  Map
-                </li>
-
-                <li
-                  className={`navbar__navitem--setting ${
-                    activePage === "help" ? "navbar__navitem--active" : ""
-                  }`}
-                  onClick={() => {
-                    navigate("/calendar");
-                  }}
-                >
-                  Calender
-                </li>
-                <li
-                  className={`navbar__navitem--setting ${
-                    activePage === "help" ? "navbar__navitem--active" : ""
-                  }`}
-                  onClick={() => {
-                    navigate("/discounts");
-                  }}
-                >
-                  Discounts
-                </li>
-                {user.role === "teacher" && (
-                  <li
-                    className={`navbar__navitem--setting ${
-                      activePage === "help" ? "navbar__navitem--active" : ""
-                    }`}
-                    onClick={() => {
-                      navigate("/create-discounts");
-                    }}
-                  >
-                    Create Discounts
-                  </li>
-                )}
-
-                <li
+               {  user &&  <li
                   className="navbar__navitem--setting"
                   onClick={() => {
                     navigate("/profile");
@@ -207,9 +177,9 @@ function Navbar({ activePage }) {
                 >
                   <CgProfile />
                   &nbsp; Profile
-                </li>
+                </li>}
 
-                {user.role === "teacher" && (
+                {(  user && 
                   <li
                     className="navbar__navitem--setting"
                     onClick={() => {
@@ -223,10 +193,10 @@ function Navbar({ activePage }) {
 
                 <hr />
 
-                <li className="navbar__navitem--setting" onClick={logOutUser}>
+                { user && <li className="navbar__navitem--setting" onClick={logOutUser}>
                   <FiLogOut />
                   &nbsp; Logout
-                </li>
+                </li>}
               </ul>
             </div>
           </>

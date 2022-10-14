@@ -9,7 +9,7 @@ function ProtectedRoute({ teacherOnly, children }) {
         if (user === null) {
             return (<Navigate to="/" replace />)
         } else {
-            if (teacherOnly === true && user.role !== "teacher") {
+            if (user === true ) {
                 return (<Navigate to="/" replace />)
             }
             return children;

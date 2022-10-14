@@ -14,22 +14,11 @@ import { stringify } from 'postcss';
 function HomePage() {
 
     const { user } = useSelector(selectUser);
-    const userName = user.name;
-    const userId = user.uid;
+ 
+    const userId = user?.uid;
     console.log(JSON.stringify(user))
 
 
-
-    // MAIN FUNCTIONS //
-    // 
-    // 
-    // 
-
-
-
-
-
-    // Get All Posts of Followed Groups
     const [allPosts, setAllPosts] = useState([]);
     useEffect(() => {
         async function getAllPostsFromDatabase() {

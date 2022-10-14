@@ -83,11 +83,11 @@ function RegisterPage() {
                       () => {
                         addDoc(collection(db, "users"), {
                           uid: userCredential.user.uid,
-                          dob: dob,
-                          reg_no: reg,
-                          role: "user",
-                          following: [],
-                          course: course,
+                          
+                          
+                        
+                          
+                         
                           profilePic: downloadURL,
                         });
                       }
@@ -99,7 +99,7 @@ function RegisterPage() {
                           uid: userCredential.user.uid,
                           email: userCredential.user.email,
                           name: userCredential.user.displayName,
-                          role: "user",
+                         
                           profilePic: downloadURL,
                         })
                       );
@@ -220,7 +220,7 @@ function RegisterPage() {
           <input
             className="text-white"
             type="text"
-            placeholder="Name"
+            placeholder="username"
             value={name}
             onChange={(event) => setName(event.target.value)}
             required={true}
@@ -228,44 +228,7 @@ function RegisterPage() {
           />
         </div>
 
-        {/* reg */}
-        <div className="registerPage__formInputGroup">
-          <input
-            className="text-white"
-            type="text"
-            placeholder="Reg No"
-            value={reg}
-            onChange={(event) => setReg(event.target.value)}
-            required={true}
-            onKeyUp={() => setError("")}
-          />
-        </div>
-
-        {/* reg */}
-        <div className="registerPage__formInputGroup">
-          <input
-            className="text-white"
-            type="text"
-            placeholder="Course Name"
-            value={course}
-            onChange={(event) => setCourse(event.target.value)}
-            required={true}
-            onKeyUp={() => setError("")}
-          />
-        </div>
-
-        {/* dob */}
-        <div className="registerPage__formInputGroup">
-          <input
-            className="text-white"
-            type="date"
-            placeholder="Name"
-            value={dob}
-            onChange={(event) => setDob(event.target.value)}
-            required={true}
-            onKeyUp={() => setError("")}
-          />
-        </div>
+        
 
         {/* email */}
         <div className="registerPage__formInputGroup">

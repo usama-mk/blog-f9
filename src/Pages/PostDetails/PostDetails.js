@@ -83,9 +83,12 @@ function PostDetails() {
     <div class="md:grid grid-cols-3 min-w-full mt-5 ">
 
         <div class="col-span-2 w-full flex justify-center ">
-            <img class="w-96  object-contain "
+            {
+                imageFile ? <img class="w-96  object-contain "
                 src={imageFile?imageFile:""}
-                alt="Description"/>
+                alt="Description"/>:
+                <h1>No image attached</h1>
+            }
         </div>
 
         <div class="col-span-1 relative pl-4">
